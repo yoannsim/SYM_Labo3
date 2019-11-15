@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Labo3</string>
+    <string name="buttonNFC">NFC</string>
+    <string name="buttonCodeBarre">Code barre</string>
 </resources>
