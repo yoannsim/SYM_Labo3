@@ -6,24 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/buttonCodeBarre"
-        android:layout_width="299dp"
-        android:layout_height="64dp"
-        android:layout_marginTop="84dp"
-        android:text="@string/buttonCodeBarre"
+    <TextView
+        android:id="@+id/resCodeBarre"
+        android:layout_width="278dp"
+        android:layout_height="56dp"
+        android:layout_marginBottom="432dp"
+        android:text="@string/resultatCodeBarre"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ButtonNFC" />
-
-    <Button
-        android:id="@+id/ButtonNFC"
-        android:layout_width="299dp"
-        android:layout_height="64dp"
-        android:layout_marginTop="56dp"
-        android:text="@string/buttonNFC"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.624"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
