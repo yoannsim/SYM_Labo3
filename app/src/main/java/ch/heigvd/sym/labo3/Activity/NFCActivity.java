@@ -1,22 +1,30 @@
 package ch.heigvd.sym.labo3.Activity;
 
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.nfc.NdefMessage;
+import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.nfc.tech.Ndef;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import ch.heigvd.sym.labo3.R;
-import ch.heigvd.sym.labo3.UtileNFC.NdefReaderTask;
+
 
 /**
  * @Class       : NFCActivity
@@ -24,25 +32,50 @@ import ch.heigvd.sym.labo3.UtileNFC.NdefReaderTask;
  * @Date        : 15.11.2019
  */
 public class NFCActivity extends AppCompatActivity {
-
+    Button btlogin;
+    EditText champMail;
+    EditText champPasword;
     private NfcAdapter mNfcAdapter;
     private String TAG = "NFC";
-    private  int minuteur =0;
+    private int minuteur = 0;
+    Timer timer = new Timer();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nfc);
-        Timer timer = new Timer();
+        btlogin = findViewById(R.id.ButtonLog);
+        champPasword = findViewById(R.id.psw);
+        champMail = findViewById(R.id.email);
+        btlogin.setOnClickListener(v -> {
+
+            if (minuteur > 0) {
+
+                if (champMail.getText().toString() == "yoyo" && champPasword.getText().toString() == "1234") {
+                    Toast.makeText(this, "OK", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(this, "wrong user or password", Toast.LENGTH_LONG).show();
+                }
+            } else {
+                Toast.makeText(this, "Rescanner le tag NFC", Toast.LENGTH_LONG).show();
+            }
+
+            Intent intent = new Intent(btlogin.getContext(), NFCActivity.class);
+            btlogin.getContext().startActivity(intent);
+        });
+
+
+
         mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-               if(minuteur > 0){
-                   minuteur--;
-               }
+                if (minuteur > 0) {
+                    minuteur--;
+
+                }
             }
-        },2000);
+        }, 200);
         if (mNfcAdapter == null) {
             // Stop here, we definitely need NFC
             Toast.makeText(this, "This device doesn't support NFC.", Toast.LENGTH_LONG).show();
@@ -60,43 +93,44 @@ public class NFCActivity extends AppCompatActivity {
     }
 
     @Override
-    protected  void onResume() {
+    protected void onResume() {
         super.onResume();
         setupForegroundDispatch();
 
     }
-    protected void onPause(){
+
+    protected void onPause() {
         super.onPause();
         stopForegroundDispatch();
     }
 
     // calledin onResume()private
-     private void setupForegroundDispatch() {
+    private void setupForegroundDispatch() {
 
-         if (mNfcAdapter == null)
-             return;
+        if (mNfcAdapter == null)
+            return;
 
-         final Intent intent = new Intent(this.getApplicationContext(), this.getClass());
+        final Intent intent = new Intent(this.getApplicationContext(), this.getClass());
 
-         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 
-         final PendingIntent pendingIntent = PendingIntent.getActivity(this.getApplicationContext(), 0, intent, 0);
-         IntentFilter[] filters = new IntentFilter[1];
-         String[][] techList = new String[][]{};// Notice that this is the same filter as in our manifest.
-         filters[0] = new IntentFilter();
-         filters[0].addAction(NfcAdapter.ACTION_NDEF_DISCOVERED);
-         filters[0].addCategory(Intent.CATEGORY_DEFAULT);
-         try {
-             filters[0].addDataType("text/plain");
-         } catch (IntentFilter.MalformedMimeTypeException e) {
-             Log.e("NFC", "MalformedMimeTypeException", e);
-         }
-         mNfcAdapter.enableForegroundDispatch(this, pendingIntent, filters, techList);
-     }
+        final PendingIntent pendingIntent = PendingIntent.getActivity(this.getApplicationContext(), 0, intent, 0);
+        IntentFilter[] filters = new IntentFilter[1];
+        String[][] techList = new String[][]{};// Notice that this is the same filter as in our manifest.
+        filters[0] = new IntentFilter();
+        filters[0].addAction(NfcAdapter.ACTION_NDEF_DISCOVERED);
+        filters[0].addCategory(Intent.CATEGORY_DEFAULT);
+        try {
+            filters[0].addDataType("text/plain");
+        } catch (IntentFilter.MalformedMimeTypeException e) {
+            Log.e("NFC", "MalformedMimeTypeException", e);
+        }
+        mNfcAdapter.enableForegroundDispatch(this, pendingIntent, filters, techList);
+    }
 
     // called in onPause()
     private void stopForegroundDispatch() {
-        if(mNfcAdapter != null)
+        if (mNfcAdapter != null)
             mNfcAdapter.disableForegroundDispatch(this);
     }
 
@@ -137,6 +171,71 @@ public class NFCActivity extends AppCompatActivity {
                     new NdefReaderTask().execute(tag);
                     break;
                 }
+            }
+        }
+    }
+
+    public class NdefReaderTask extends AsyncTask<Tag, Void, String> {
+
+        @Override
+        protected String doInBackground(Tag... params) {
+            Tag tag = params[0];
+
+            Ndef ndef = Ndef.get(tag);
+            if (ndef == null) {
+                // NDEF is not supported by this Tag.
+                return null;
+            }
+
+            NdefMessage ndefMessage = ndef.getCachedNdefMessage();
+
+            NdefRecord[] records = ndefMessage.getRecords();
+            for (NdefRecord ndefRecord : records) {
+                if (ndefRecord.getTnf() == NdefRecord.TNF_WELL_KNOWN && Arrays.equals(ndefRecord.getType(), NdefRecord.RTD_TEXT)) {
+                    try {
+                        return readText(ndefRecord);
+                    } catch (UnsupportedEncodingException e) {
+                        Log.e("NFC", "Unsupported Encoding", e);
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        private String readText(NdefRecord record) throws UnsupportedEncodingException {
+            /*
+             * See NFC forum specification for "Text Record Type Definition" at 3.2.1
+             *
+             * http://www.nfc-forum.org/specs/
+             *
+             * bit_7 defines encoding
+             * bit_6 reserved for future use, must be 0
+             * bit_5..0 length of IANA language code
+             */
+
+            byte[] payload = record.getPayload();
+
+            // Get the Text Encoding
+            String textEncoding = ((payload[0] & 128) == 0) ? "UTF-8" : "UTF-16";
+
+            // Get the Language Code
+            int languageCodeLength = payload[0] & 0063;
+
+            // String languageCode = new String(payload, 1, languageCodeLength, "US-ASCII");
+            // e.g. "en"
+
+            // Get the Text
+            return new String(payload, languageCodeLength + 1, payload.length - languageCodeLength - 1, textEncoding);
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            if (result != null) {
+                minuteur = 5;
+                Context context = getApplicationContext();
+
+                Toast.makeText(context, "lecture NFC "+result, Toast.LENGTH_LONG).show();
             }
         }
     }

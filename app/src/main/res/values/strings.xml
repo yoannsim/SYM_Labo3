@@ -3,4 +3,7 @@
     <string name="buttonNFC">NFC</string>
     <string name="buttonCodeBarre">Code barre</string>
     <string name="resultatCodeBarre">Résultat du code barre</string>
+    <string name="login">Connextion</string>
+    <string name="email">user mail</string>
+    <string name="psw">mot de passe</string>
 </resources>
