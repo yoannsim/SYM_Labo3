@@ -4,37 +4,32 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import ch.heigvd.sym.labo3.R;
 
 /**
- * @Class       : NFCActivity
+ * @Class       : CodeBarreActivity
  * @Author(s)   : Spinelli Isaia et Simonet Yoann
  * @Date        : 15.11.2019
- * @Reference : https://github.com/journeyapps/zxing-android-embedded#adding-aar-dependency-with-gradle
+ * @brief       : Permet de scanner un QR code via l'application de Barcode Scanner
+ * @Reference   : https://github.com/journeyapps/zxing-android-embedded#adding-aar-dependency-with-gradle
+ *               https://stackoverflow.com/questions/8831050/android-how-to-read-qr-code-in-my-application
  */
 public class CodeBarreActivity extends AppCompatActivity {
-
+    // Pour afficher le résultat
     private TextView resCodeBarre;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_code_barre);
-
         resCodeBarre = findViewById(R.id.resCodeBarre);
 
-        /*
-            Les codes QR peuvent stocker jusqu'à 7 089 caractères numériques,
-            4 296 caractères alphanumériques,
-            bien au-delà de la capacité du code-barres (de 10 à 13 caractères).
-         */
-
-        // https://stackoverflow.com/questions/8831050/android-how-to-read-qr-code-in-my-application
+        // Essaie de lancer l'app de Barcode Scanner
         try {
-            // Lance l'app de Barcode Scanner
             Intent intent = new Intent("com.google.zxing.client.android.SCAN");
             intent.putExtra("SCAN_MODE", "QR_CODE_MODE"); // "PRODUCT_MODE for bar codes
             // Donne la fonction de callback
@@ -63,6 +58,7 @@ public class CodeBarreActivity extends AppCompatActivity {
 
             } else if (resultCode == RESULT_CANCELED) {
                 //Handle cancel
+                Toast.makeText(this, "Canceled !", Toast.LENGTH_LONG).show();
             }
         }
     }

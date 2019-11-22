@@ -8,13 +8,12 @@
 
     <TextView
         android:id="@+id/resCodeBarre"
-        android:layout_width="278dp"
-        android:layout_height="56dp"
-        android:layout_marginBottom="432dp"
+        android:layout_width="305dp"
+        android:layout_height="602dp"
         android:text="@string/resultatCodeBarre"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.624"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
