@@ -12,6 +12,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import ch.heigvd.sym.labo3.R;
 import ch.heigvd.sym.labo3.UtileNFC.NdefReaderTask;
 
@@ -24,14 +27,22 @@ public class NFCActivity extends AppCompatActivity {
 
     private NfcAdapter mNfcAdapter;
     private String TAG = "NFC";
+    private  int minuteur =0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nfc);
-
+        Timer timer = new Timer();
         mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
-
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+               if(minuteur > 0){
+                   minuteur--;
+               }
+            }
+        },2000);
         if (mNfcAdapter == null) {
             // Stop here, we definitely need NFC
             Toast.makeText(this, "This device doesn't support NFC.", Toast.LENGTH_LONG).show();
