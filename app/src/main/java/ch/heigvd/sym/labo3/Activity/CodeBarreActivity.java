@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import ch.heigvd.sym.labo3.R;
 
 /**
- * @Class       : NFCActivity
+ * @Class       : NFCloginActivity
  * @Author(s)   : Spinelli Isaia et Simonet Yoann
  * @Date        : 15.11.2019
  * @Reference : https://github.com/journeyapps/zxing-android-embedded#adding-aar-dependency-with-gradle

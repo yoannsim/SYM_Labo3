@@ -2,69 +2,51 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/ButtonLog"
-        android:layout_width="299dp"
-        android:layout_height="64dp"
-        android:layout_marginTop="100dp"
-        android:text="@string/login"
+        android:id="@+id/LowSecur"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="88dp"
+        android:text="Button"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/psw" />
+        app:layout_constraintTop_toBottomOf="@+id/tmp" />
+
+    <Button
+        android:id="@+id/midSecur"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/LowSecur" />
+
+    <Button
+        android:id="@+id/highSecu"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/midSecur" />
 
     <TextView
-        android:id="@+id/textNFC"
-        android:layout_width="258dp"
-        android:layout_height="49dp"
-        android:layout_marginTop="24dp"
-        android:text="NFC connextion"
-        android:textColor="#180101"
-        android:textSize="30sp"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="85dp" />
-
-    <EditText
-        android:id="@+id/email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="76dp"
-        android:autofillHints=""
-        android:hint="@string/email"
-        android:inputType="textEmailAddress"
-        app:layout_constraintTop_toBottomOf="@+id/textNFC"
-        tools:layout_editor_absoluteX="56dp">
-
-        <requestFocus />
-    </EditText>
-
-    <EditText
-        android:id="@+id/psw"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/email"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="48dp"
-        android:autofillHints=""
-        android:hint="@string/psw"
-        android:inputType="textPassword"
-        app:layout_constraintTop_toBottomOf="@+id/email"
-        tools:layout_editor_absoluteX="0dp">
-
-        <requestFocus />
-    </EditText>
-
-    <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tmp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="52dp"
         android:text="TextView"
-        app:layout_constraintTop_toBottomOf="@+id/ButtonLog"
-        tools:layout_editor_absoluteX="176dp" />
-
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
