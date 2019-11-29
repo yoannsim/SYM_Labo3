@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
         btnNFC = findViewById(R.id.ButtonNFC);
         btnNFC.setOnClickListener(v -> {
-            Intent intent = new Intent(btnNFC.getContext(), NFCActivity.class);
+            Intent intent = new Intent(btnNFC.getContext(), NFCloginActivity.class);
             btnNFC.getContext().startActivity(intent);
         });
 
