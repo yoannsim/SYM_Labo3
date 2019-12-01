@@ -23,7 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:windowSoftInputMode="adjustPan" android:name=".Activity.NFCloginActivity" />
+        <activity android:windowSoftInputMode="adjustPan" android:name=".utileNFC.NFCloginActivity" />
         <activity android:windowSoftInputMode="adjustPan" android:name=".Activity.CodeBarreActivity" />
         <activity android:windowSoftInputMode="adjustPan" android:name=".Activity.NFCActivity" />
     </application>

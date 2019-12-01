@@ -6,4 +6,7 @@
     <string name="login">Connextion</string>
     <string name="email">user mail</string>
     <string name="psw">mot de passe</string>
+    <string name="hSecu">haute securité</string>
+    <string name="mSecu">moyenne securité</string>
+    <string name="lSecu">basse securité</string>
 </resources>

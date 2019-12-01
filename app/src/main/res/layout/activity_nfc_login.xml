@@ -58,14 +58,4 @@
         <requestFocus />
     </EditText>
 
-    <TextView
-        android:id="@+id/lectureTag"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="test"
-        android:visibility="visible"
-        app:layout_constraintTop_toBottomOf="@+id/ButtonLog"
-        tools:layout_editor_absoluteX="176dp" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

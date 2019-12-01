@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.Button;
 
 import ch.heigvd.sym.labo3.Activity.*;
+import ch.heigvd.sym.labo3.utileNFC.NFCloginActivity;
 
 /**
  * @Class       : MainActivity
