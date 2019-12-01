@@ -1,12 +1,12 @@
 package ch.heigvd.sym.labo3;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
-import ch.heigvd.sym.labo3.Activity.*;
+import androidx.appcompat.app.AppCompatActivity;
+
+import ch.heigvd.sym.labo3.Activity.CodeBarreActivity;
 import ch.heigvd.sym.labo3.utileNFC.NFCloginActivity;
 
 /**
@@ -23,13 +23,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        /* Appelle l'activité NFC */
         btnNFC = findViewById(R.id.ButtonNFC);
         btnNFC.setOnClickListener(v -> {
             Intent intent = new Intent(btnNFC.getContext(), NFCloginActivity.class);
             btnNFC.getContext().startActivity(intent);
         });
 
+        /* Appelle l'activité du code barre */
         btnCodeBare = findViewById(R.id.buttonCodeBarre);
 
         btnCodeBare.setOnClickListener(v -> {

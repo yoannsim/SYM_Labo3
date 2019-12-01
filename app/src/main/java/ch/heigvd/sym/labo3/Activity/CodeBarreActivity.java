@@ -51,7 +51,7 @@ public class CodeBarreActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 // Récupère le resultat
                 String contents = intent.getStringExtra("SCAN_RESULT"); // String
-                // récupère le format
+                // Récupère le format
                 String format = intent.getStringExtra("SCAN_RESULT_FORMAT"); // QR_CODE
                 // Affiche le résultat
                 resCodeBarre.setText(contents);

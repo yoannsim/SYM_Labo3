@@ -10,6 +10,11 @@ import android.util.Log;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 
+/**
+ * @Class       : NdefReaderTaskSuper
+ * @Author(s)   : Spinelli Isaia et Simonet Yoann
+ * @Date        : 15.11.2019
+ */
 public class NdefReaderTaskSuper extends AsyncTask<Tag, Void, String> {
 
     @Override

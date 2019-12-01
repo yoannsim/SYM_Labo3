@@ -17,9 +17,14 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import ch.heigvd.sym.labo3.R;
-import ch.heigvd.sym.labo3.utileNFC.NFCloginActivity;
 import ch.heigvd.sym.labo3.utileNFC.NdefReaderTaskSuper;
 
+/**
+ * @Class       : NFCActivity
+ * @Author(s)   : Spinelli Isaia et Simonet Yoann
+ * @Date        : 15.11.2019
+ * @brief       : Permet de scanner un QR code via l'application de Barcode Scanner
+ */
 public class NFCActivity extends AppCompatActivity {
 
     Button lowSecurity;
